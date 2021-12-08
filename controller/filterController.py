@@ -6,19 +6,18 @@ This class is used to filter the image.
 """
 
 
-def to_grayscale(path):
+def to_grayscale(image):
     """
     Convert a colored image to grayscale.
     :param path: path to the image
     :return: grayscale image
     """
     # Convert the image to grayscale.
-    img_path = cv2.imread(path)
-    gray = cv2.cvtColor(img_path, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     return gray
 
 
-def to_blur(path, value):
+def to_blur(image, value):
     """
     Blur the image.
     :param path: path to the image
@@ -27,12 +26,11 @@ def to_blur(path, value):
     """
     # Blur the image.
     value = value * 10
-    img_path = cv2.imread(path)
-    blur = cv2.blur(img_path, (value, value))
+    blur = cv2.blur(image, (value, value))
     return blur
 
 
-def to_dilate(path, value):
+def to_dilate(image, value):
     """
     Dilate the image.
     :param path: path to the image
@@ -40,7 +38,6 @@ def to_dilate(path, value):
     :return: dilated image
     """
     # Dilate the image.
-    img_path = cv2.imread(path)
     kernel = numpy.ones((value, value), numpy.uint8) # Create a kernel.
-    dilate = cv2.dilate(img_path, kernel) # Dilate the image.
+    dilate = cv2.dilate(image, kernel) # Dilate the image.
     return dilate
