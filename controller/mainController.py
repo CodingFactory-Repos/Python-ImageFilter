@@ -9,9 +9,14 @@ This is the controller that will be used to control the program.
 # Get all the images from the folder
 images = getImagesController.get_images()
 
-print("Images: ", images)
-
 for (i, image) in enumerate(images):
     gray_image = filterController.to_grayscale(image)
     cv2.imwrite(image.replace("images", "output"), gray_image)
-    print("[INFO] processed image {}/{}".format(i + 1, len(images)))
+    print("[INFO] processed image to grayscale {}/{}".format(i + 1, len(images)))
+
+
+for (i, image) in enumerate(images):
+    blur_image = filterController.to_blur(image, 3)
+    cv2.imwrite(image.replace("images", "output"), blur_image)
+    print("[INFO] processed image to blur {}/{}".format(i + 1, len(images)))
+
