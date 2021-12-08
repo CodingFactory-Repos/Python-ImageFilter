@@ -1,14 +1,15 @@
+from controller import toGrayscaleController, getImagesController
 import cv2
 """
 This is the main controller of the program.
 This is the controller that will be used to control the program.
 """
 
-image = cv2.imread('./data/images/dubai.jpg')
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Get all the images from the folder
+images = getImagesController.get_images()
 
-cv2.imshow('Original image', image)
-cv2.imshow('Gray image', gray)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+for(i, image) in enumerate(images):
+    print("[text] " + image)
+    gray_image = toGrayscaleController.to_grayscale(image)
+    cv2.imwrite(image.replace("images", "output"), gray_image)
+    print("[INFO] processed image {}/{}".format(i + 1, len(images)))
