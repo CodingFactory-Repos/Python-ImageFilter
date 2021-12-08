@@ -1,4 +1,4 @@
-from controller import filterController, getImagesController
+from controller import filterController, imagesController
 import cv2
 
 """
@@ -7,16 +7,9 @@ This is the controller that will be used to control the program.
 """
 
 # Get all the images from the folder
-images = getImagesController.get_images()
+images = imagesController.get_images()
 
 for (i, image) in enumerate(images):
-    gray_image = filterController.to_grayscale(image)
-    cv2.imwrite(image.replace("images", "output"), gray_image)
-    print("[INFO] processed image to grayscale {}/{}".format(i + 1, len(images)))
-
-
-for (i, image) in enumerate(images):
-    blur_image = filterController.to_blur(image, 3)
-    cv2.imwrite(image.replace("images", "output"), blur_image)
-    print("[INFO] processed image to blur {}/{}".format(i + 1, len(images)))
-
+    dilate_image = filterController.to_dilate(image, 10)
+    imagesController.write_images(dilate_image, image.replace('.jpg', '_dilate.jpg'))
+    print("[INFO] processed image to dilate {}/{}".format(i + 1, len(images)))
