@@ -8,6 +8,8 @@ This is the controller that will be used to control the program.
 # Get all the images from the folder
 images = getImagesController.get_images()
 
+print("Images: ", images)
+
 for(i, image) in enumerate(images):
     print("[text] " + image)
     gray_image = toGrayscaleController.to_grayscale(image)
