@@ -1,7 +1,16 @@
 import os
 
+"""
+This controller is used to get all the images from the data folder.
+"""
+
 
 def get_images(actual_images=None):
+    """
+    Get all images from the data/images folder
+    :param actual_images: list of images to be returned
+    :return: list of images
+    """
     if actual_images is None:
         all_images = os.listdir("./data/images")
     else:
@@ -24,6 +33,11 @@ def get_images(actual_images=None):
 
 
 def get_images_path(images):
+    """
+    Get the path of the images
+    :param images: get images
+    :return: path of the images
+    """
     for (i, image) in enumerate(images):
         images[i] = "./data/images/" + image
 
