@@ -1,4 +1,5 @@
 import os
+import cv2
 
 """
 This controller is used to get all the images from the data folder.
@@ -42,3 +43,10 @@ def get_images_path(images):
         images[i] = "./data/images/" + image
 
     return images
+
+
+def write_images(image, path):
+    """
+    Write all images to the data/output directory
+    """
+    cv2.imwrite(path.replace("images", "output"), image)
