@@ -18,6 +18,9 @@ for arg in args:
 
             image = cv2.imread(image_path)
 
+            print(f"-- --- --\n")
+            print(f"Processing image {i+1} of {len(images_list)}")
+
             if 'blur' in filters_list and filters_list['blur'] != None:
                 image = filterController.to_blur(image, int(filters_list['blur']))
                 print("[INFO] Blur filter applied")
@@ -30,4 +33,5 @@ for arg in args:
                 image = filterController.to_dilate(image, int(filters_list['dilate']))
                 print("[INFO] Dilate filter applied")
 
+            print(f"[INFO] Saving image {images_list[i]}")
             imagesController.write_images(image, image_path)
