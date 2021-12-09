@@ -36,3 +36,4 @@ for arg in args:  # For each autorized argument
 
 print("Files have been saved in the output folder") # Print a end of program message
 loggerController.add_log("------ Program has been finished ------") # Add a program ending log to the log file
+loggerController.exit_application()

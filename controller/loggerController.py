@@ -1,10 +1,32 @@
+import os
+from pathlib import Path
 from datetime import datetime
+from controller import argsController
+from model import loggerModel
 
 """
 This class is responsible for logging the data from the sensors.
 """
 
-log_file = "./data/logger.log" # Log file path
+log_file = loggerModel.logger("./data/logger.log")
+args = argsController.get_args()
+
+
+def initialize():
+    """
+    This function initializes the logger.
+    :return:
+    """
+    if '-l' in args or '--log-file' in args:
+        if '-l' in args:
+            path = args.index('-l') + 1
+        elif '--log-file' in args:
+            path = args.index('--log-file') + 1
+
+        folder_path = os.path.dirname(args[path])
+        Path(folder_path).mkdir(parents=True, exist_ok=True)
+
+        log_file.set_log_path(args[path])
 
 
 def add_log(message):
@@ -13,13 +35,13 @@ def add_log(message):
     :param message:
     :return:
     """
-    now = datetime.now() # Get current date and time
-    timestamp = now.strftime('%Y/%m/%d %Hh %Mm %Ss') # Format date and time
-    formatted = f'{timestamp} - {message}' # Format message
+    now = datetime.now()  # Get current date and time
+    timestamp = now.strftime('%Y/%m/%d %Hh %Mm %Ss')  # Format date and time
+    formatted = f'{timestamp} - {message}'  # Format message
 
-    print(formatted) # Print message to console
-    with open(log_file, 'a') as f: # Open log file
-        f.write(formatted + '\n') # Write message to log file
+    print(formatted)  # Print message to console
+    with open(log_file.get_log_path(), 'a') as f:  # Open log file
+        f.write(formatted + '\n')  # Write message to log file
 
 
 def dump_log():
@@ -27,8 +49,9 @@ def dump_log():
     This function dumps the log file to the console.
     :return:
     """
-    with open(log_file, 'r') as f: # Open log file
-        print(f.read()) # Print log file to console
+    with open(log_file.get_log_path(), 'r') as f:  # Open log file
+        print(f.read())  # Print log file to console
+
 
 def exit_application():
     """
@@ -37,3 +60,6 @@ def exit_application():
     """
     print("Exiting application...")
     exit()
+
+
+initialize()

@@ -6,7 +6,9 @@ There is no need to modify this file.
 """
 
 try:
-    iniController()
+    loggerController()  # Initialize the logger
+    iniController()  # Initialize the configuration
+
     mainController()  # Start the main controller
 except Exception as e:
     loggerController.add_log("[Error] An error occurred while running the main controller.")
