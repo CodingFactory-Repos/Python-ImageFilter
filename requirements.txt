@@ -1,2 +1,6 @@
+args==0.1.0
+configparser==5.2.0
+inifile==0.4.1
 numpy==1.21.4
 opencv-python==4.5.4.60
+output==1.0.1
