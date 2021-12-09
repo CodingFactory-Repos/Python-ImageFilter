@@ -1,16 +1,29 @@
 from datetime import datetime
 
-log_file = "./data/logger.log"
+"""
+This class is responsible for logging the data from the sensors.
+"""
+
+log_file = "./data/logger.log" # Log file path
 
 
 def add_log(message):
-    now = datetime.now()
-    timestamp = now.strftime('%Y/%m/%d %Hh %Mm %Ss')
-    formatted = f'{timestamp} - {message}'
-    with open(log_file, 'a') as f:
-        f.write(formatted + '\n')
+    """
+    This function adds a log message to the log file.
+    :param message:
+    :return:
+    """
+    now = datetime.now() # Get current date and time
+    timestamp = now.strftime('%Y/%m/%d %Hh %Mm %Ss') # Format date and time
+    formatted = f'{timestamp} - {message}' # Format message
+    with open(log_file, 'a') as f: # Open log file
+        f.write(formatted + '\n') # Write message to log file
 
 
 def dump_log():
-    with open(log_file, 'r') as f:
-        print(f.read())
+    """
+    This function dumps the log file to the console.
+    :return:
+    """
+    with open(log_file, 'r') as f: # Open log file
+        print(f.read()) # Print log file to console

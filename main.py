@@ -5,4 +5,9 @@ This file is the entry point of the project.
 There is no need to modify this file.
 """
 
-mainController  # Start the main controller
+try:
+    mainController()  # Start the main controller
+except Exception as e:
+    print(e)
+    print("An error has occurred. Please check the logs.")
+    exit(1)

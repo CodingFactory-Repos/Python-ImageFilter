@@ -7,17 +7,26 @@ This class is used to filter the image.
 """
 
 
-def to_grayscale(image):
+def get_filters_available():
+    """
+    Get the available filters.
+    :return: list of filters
+    """
+    # TODO: add more filters
+
+    return ['grayscale', 'blur', 'dilate'] # Show the available filters
+
+def to_grayscale(image, value):
     """
     Convert a colored image to grayscale.
     :param path: path to the image
     :return: grayscale image
     """
     # Convert the image to grayscale.
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    loggerController.add_log(f'[Filter] Grayscale filter applied')
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # Convert the image to grayscale.
+    loggerController.add_log(f'[Filter] Grayscale filter applied') # Log the filter.
 
-    return gray
+    return gray # Return the grayscale image.
 
 
 def to_blur(image, value):
@@ -28,11 +37,11 @@ def to_blur(image, value):
     :return: blurred image
     """
     # Blur the image.
-    value = value * 10
-    blur = cv2.blur(image, (value, value))
-    loggerController.add_log(f'[Filter] Blur filter applied')
+    value = value * 10 # Convert the value to a multiple of 10.
+    blur = cv2.blur(image, (value, value)) # Blur the image.
+    loggerController.add_log(f'[Filter] Blur filter applied') # Log the filter.
 
-    return blur
+    return blur # Return the blurred image.
 
 
 def to_dilate(image, value):
@@ -45,6 +54,6 @@ def to_dilate(image, value):
     # Dilate the image.
     kernel = numpy.ones((value, value), numpy.uint8)  # Create a kernel.
     dilate = cv2.dilate(image, kernel)  # Dilate the image.
-    loggerController.add_log(f'[Filter] Dilate filter applied')
+    loggerController.add_log(f'[Filter] Dilate filter applied') # Log the filter.
 
-    return dilate
+    return dilate # Return the dilated image.
