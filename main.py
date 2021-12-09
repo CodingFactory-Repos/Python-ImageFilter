@@ -1,5 +1,4 @@
 from controller import mainController  # Import the main controller in controller/mainController.py
-
 """
 Main file of the project.
 This file is the entry point of the project.
