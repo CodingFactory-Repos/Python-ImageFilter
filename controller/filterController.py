@@ -14,7 +14,7 @@ def get_filters_available():
     """
     # TODO: add more filters
 
-    return ['grayscale', 'blur', 'dilate'] # Show the available filters
+    return ['grayscale', 'blur', 'dilate', 'text'] # Show the available filters
 
 def to_grayscale(image, value):
     """
@@ -57,3 +57,14 @@ def to_dilate(image, value):
     loggerController.add_log(f'[Filter] Dilate filter applied') # Log the filter.
 
     return dilate # Return the dilated image.
+
+
+def to_text(image, value):
+    font = cv2.FONT_HERSHEY_SIMPLEX
+
+    position = ((int) (image.shape[1]/2 - 268/2), (int) (image.shape[0]/2 - 36/2))
+
+    text = cv2.putText(image, value, position, font, 1, (255, 255, 255), 2)
+    loggerController.add_log(f'[Filter] Text filter applied') # Log the filter.
+
+    return text

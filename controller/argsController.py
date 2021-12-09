@@ -32,8 +32,13 @@ def get_dictionary(argument):
     for param in params:
         param = param.split(':') # Split the parameters
 
+        print(param)
+
         if len(param) == 2: # If the parameter has a value
-            params_dict[param[0]] = int(param[1]) # Add the parameter to the dictionary
+            try:
+                params_dict[param[0]] = int(param[1]) # Add the parameter to the dictionary
+            except ValueError:
+                params_dict[param[0]] = param[1] # Add the parameter to the dictionary
         else: # If the parameter has no value
             if(param[0] == 'grayscale'): # If the parameter is grayscale
                 params_dict[param[0]] = 0 # Add the parameter to the dictionary
