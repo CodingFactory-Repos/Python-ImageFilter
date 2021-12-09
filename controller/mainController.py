@@ -1,15 +1,33 @@
-from controller import filterController, imagesController
 import cv2
+
+from controller import filterController, imagesController, argsController
 
 """
 This is the main controller of the program.
 This is the controller that will be used to control the program.
 """
 
-# Get all the images from the folder
-images = imagesController.get_images()
+args = ["-f", "--filter"]
+images_list = imagesController.get_images()
 
-for (i, image) in enumerate(images):
-    dilate_image = filterController.to_dilate(image, 10)
-    imagesController.write_images(dilate_image, image.replace('.jpg', '_dilate.jpg'))
-    print("[INFO] processed image to dilate {}/{}".format(i + 1, len(images)))
+for arg in args:
+    if arg in argsController.get_args():
+        filters_list = argsController.get_dictionary('--filter')
+
+        for (i, image_path) in enumerate(images_list):
+
+            image = cv2.imread(image_path)
+
+            if 'blur' in filters_list and filters_list['blur'] != None:
+                image = filterController.to_blur(image, int(filters_list['blur']))
+                print("[INFO] Blur filter applied")
+
+            if 'grayscale' in filters_list and filters_list['grayscale'] != None:
+                image = filterController.to_grayscale(image)
+                print("[INFO] Grayscale filter applied")
+
+            if 'dilate' in filters_list and filters_list['dilate'] != None:
+                image = filterController.to_dilate(image, int(filters_list['dilate']))
+                print("[INFO] Dilate filter applied")
+
+            imagesController.write_images(image, image_path)
