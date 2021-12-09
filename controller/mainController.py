@@ -6,31 +6,33 @@ This is the main controller of the program.
 This is the controller that will be used to control the program.
 """
 
+loggerController.add_log("------ Program as been lunch ------")
+
 args = ["-f", "--filter"]
 images_list = imagesController.get_images()
-loggerController.add_log("------ Program as been lunch ------")
+
 for arg in args:
     if arg in argsController.get_args():
-        filters_list = argsController.get_dictionary('--filter')
+        if arg == "-f" or arg == "--filter":
+            filters_list = argsController.get_dictionary(arg)
 
-        for (i, image_path) in enumerate(images_list):
+            loggerController.add_log(f"[Parameters] Filter : {str(filters_list)}\n")
 
-            image = cv2.imread(image_path)
+            for (i, image_path) in enumerate(images_list):
 
-            print(f"-- --- --\n")
-            print(f"Processing image {i+1} of {len(images_list)}")
+                image = cv2.imread(image_path)
 
-            if 'blur' in filters_list and filters_list['blur'] != None:
-                image = filterController.to_blur(image, filters_list['blur'], image_path)
-                print("[INFO] Blur filter applied")
+                loggerController.add_log(f"[Processing] Image {image_path} ({i + 1} of {len(images_list)})")
 
-            if 'grayscale' in filters_list and filters_list['grayscale'] != None:
-                image = filterController.to_grayscale(image, image_path)
-                print("[INFO] Grayscale filter applied")
+                if 'blur' in filters_list and filters_list['blur'] != None:
+                    image = filterController.to_blur(image, filters_list['blur'])
 
-            if 'dilate' in filters_list and filters_list['dilate'] != None:
-                image = filterController.to_dilate(image, filters_list['dilate'], image_path)
-                print("[INFO] Dilate filter applied")
+                if 'grayscale' in filters_list and filters_list['grayscale'] != None:
+                    image = filterController.to_grayscale(image)
 
-            print(f"[INFO] Saving image {images_list[i]}")
-            imagesController.write_images(image, image_path)
+                if 'dilate' in filters_list and filters_list['dilate'] != None:
+                    image = filterController.to_dilate(image, filters_list['dilate'])
+
+                loggerController.add_log(f"[Processing] Image {i + 1} of {len(images_list)} has been processed")
+                imagesController.write_images(image, image_path)
+                loggerController.add_log(f"[Processing] Image {i + 1} of {len(images_list)} has been saved (path: {image_path.replace('images', 'output')})\n")
