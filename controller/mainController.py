@@ -8,7 +8,7 @@ This is the controller that will be used to control the program.
 
 loggerController.add_log("------ Program as been lunch ------")  # Add a program starting log to the log file
 
-args = ["-f", "--filter"]  # List of arguments that can be used
+args = ["-f", "--filter", "-v", "--video"]  # List of arguments that can be used
 images_list = imagesController.get_images()  # Get the list of myimages
 
 for arg in args:  # For each autorized argument
@@ -33,6 +33,25 @@ for arg in args:  # For each autorized argument
                     f"[Processing] Image {i + 1} of {len(images_list)} has been processed")  # Add a processing log to the log file
                 imagesController.write_images(image, image_path) # Write the image to the output     directory
                 loggerController.add_log(f"[Processing] Image {i + 1} of {len(images_list)} has been saved (path: {image_path.replace(iniController.get_input_path(), iniController.get_output_path())})\n") # Add a processing log to the log file
+
+        elif arg == "-v" or arg == "--video":
+            filters_list = argsController.get_dictionary(arg)  # Get the list of filters
+
+            # Opens the Video file
+            cap = cv2.VideoCapture(filters_list['getimages'])
+            i = 0
+            while (cap.isOpened()):
+                ret, frame = cap.read()
+                if ret == False:
+                    break
+
+                file_name = str(i).zfill(3)
+                cv2.imwrite('./data/video/' + str(file_name) + '.jpg', frame)
+                i += 1
+
+            cap.release()
+            cv2.destroyAllWindows()
+
 
 print("Files have been saved in the output folder") # Print a end of program message
 loggerController.add_log("------ Program has been finished ------") # Add a program ending log to the log file
