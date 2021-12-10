@@ -1,4 +1,5 @@
 import sys
+from controller import configController
 
 
 def get_args():
@@ -6,8 +7,10 @@ def get_args():
     Get the arguments from the command line
     :return: list of arguments
     """
-    return sys.argv # Return the list of arguments
-
+    if len(sys.argv) > 1:
+        return sys.argv # main.py --filter "blur:2"
+    else:
+        return configController.get_ini() # --filter grayscale|blur:3|dilate:3
 
 def get_params(argument):
     """
