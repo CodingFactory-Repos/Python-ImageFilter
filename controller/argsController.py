@@ -35,8 +35,6 @@ def get_dictionary(argument):
     for param in params:
         param = param.split(':') # Split the parameters
 
-        print(param)
-
         if len(param) == 2: # If the parameter has a value
             try:
                 params_dict[param[0]] = int(param[1]) # Add the parameter to the dictionary
@@ -46,6 +44,6 @@ def get_dictionary(argument):
             if(param[0] == 'grayscale'): # If the parameter is grayscale
                 params_dict[param[0]] = 0 # Add the parameter to the dictionary
             else: # If the parameter is not grayscale
-                params_dict[param[0]] = None # Add the parameter to the dictionary
+                params_dict['getimages'] = param[0] # Add the parameter to the dictionary
 
     return params_dict # Return the dictionary

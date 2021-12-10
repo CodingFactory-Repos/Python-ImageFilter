@@ -9,7 +9,7 @@ This is the controller that will be used to control the program.
 loggerController.add_log("------ Program as been lunch ------")  # Add a program starting log to the log file
 
 args = ["-f", "--filter", "-v", "--video"]  # List of arguments that can be used
-images_list = imagesController.get_images()  # Get the list of myimages
+images_list = imagesController.get_images()  # Get the list of images
 
 for arg in args:  # For each autorized argument
     if arg in argsController.get_args():  # If the argument is in the list of arguments
@@ -38,6 +38,7 @@ for arg in args:  # For each autorized argument
             filters_list = argsController.get_dictionary(arg)  # Get the list of filters
 
             # Opens the Video file
+            print(filters_list)
             cap = cv2.VideoCapture(filters_list['getimages'])
             i = 0
             while (cap.isOpened()):

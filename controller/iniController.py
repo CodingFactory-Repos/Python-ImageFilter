@@ -3,7 +3,7 @@ from pathlib import Path
 from controller import argsController, loggerController
 from model import iniModel
 
-path_config = iniModel.ini("./data/myimages", "./data/output")
+path_config = iniModel.ini("./data/images", "./data/output")
 args = argsController.get_args()
 
 
