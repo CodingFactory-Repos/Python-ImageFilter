@@ -31,7 +31,7 @@ for arg in args:  # For each autorized argument
 
                 loggerController.add_log(
                     f"[Processing] Image {i + 1} of {len(images_list)} has been processed")  # Add a processing log to the log file
-                imagesController.write_images(image, image_path) # Write the image to the output directory
+                imagesController.write_images(image, image_path) # Write the image to the output     directory
                 loggerController.add_log(f"[Processing] Image {i + 1} of {len(images_list)} has been saved (path: {image_path.replace(iniController.get_input_path(), iniController.get_output_path())})\n") # Add a processing log to the log file
 
 print("Files have been saved in the output folder") # Print a end of program message
