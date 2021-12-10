@@ -13,6 +13,6 @@ def get_ini():
     read_config = configparser.ConfigParser()
     read_config.read("sample.ini")
 
-    name = read_config.get("Filters", "content")
+    name = read_config.get("Filters", "content").split(" ")
 
     return name
